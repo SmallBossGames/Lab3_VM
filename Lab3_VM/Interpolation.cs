@@ -45,16 +45,16 @@ namespace Lab3_VM
 
             var outArray = new decimal[length];
 
-            var koeffCount = 1;
+            var koeffNumber = 0;
             outArray[0] = 1;
 
             for (int j = 0; j < length; j++)
             {
                 if (i == j) continue;
 
-                koeffCount++;
+                koeffNumber++;
 
-                for (int k = length-2; k >= 0; k--)
+                for (int k = koeffNumber-1; k >= 0; k--)
                 {
                     outArray[k + 1] -= outArray[k] * inputTable[0, j];
                 }
