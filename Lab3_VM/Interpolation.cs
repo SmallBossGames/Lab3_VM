@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lab2_VM;
 
 namespace Lab3_VM
 {
@@ -78,7 +79,54 @@ namespace Lab3_VM
         }
 
 
+        public static decimal[] GetSplineCube(decimal[,] inputTable)
+        {
+            var splineMatrix = GetSplineMatrix(inputTable);
+            for (int i = 0; i < splineMatrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < splineMatrix.GetLength(1); j++)
+                {
+                    Console.Write(splineMatrix[i, j].ToString() + ' ');
+                }
+                Console.WriteLine();
+            }
 
+            var mKoeffArray = Sweep.SweepMatrix(splineMatrix);
+
+            return mKoeffArray;
+        }
+
+        ////////////////////
+        //Попробуй сделать это через перечисления
+
+        private static decimal[,] GetSplineMatrix(decimal[,] inputTable)
+        {
+            decimal H(int i) => inputTable[0, i+1] - inputTable[0, i];
+
+            decimal D(int i) => (inputTable[1, i + 1] - inputTable[1, i])/H(i);
+
+            var hight = inputTable.GetLength(0);
+            var length = inputTable.GetLength(1)-2;
+
+            if (hight != 2) throw new FormatException();
+
+            var outputTable = new decimal[length, length+1];
+
+            for (var i=0; i< length; i++)
+            {
+                if (i != 0)
+                    outputTable[i, i - 1] = H(i);
+
+                if (i != length - 1)
+                    outputTable[i, i + 1] = H(i+1);
+
+                outputTable[i, i] = 2 * (H(i) + H(i+1));
+
+                outputTable[i, length] = 6 * (D(i + 1) - D(i));
+            }
+
+            return outputTable;
+        }
 
 
     }
