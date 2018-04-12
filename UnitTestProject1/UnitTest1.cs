@@ -72,5 +72,31 @@ namespace UnitTestProject1
                 }
             }
         }
+
+        [TestMethod]
+        public void InterpolateSplineTest1()
+        {
+            var x = 2m;
+            var validValue = 2.0m;
+            var accuracy = 0.001m;
+
+            var value = Interpolation.InterpolateSpline(inputValue2, x);
+
+            if (Abs(value - validValue) > accuracy)
+                Assert.Fail(Abs(value - validValue).ToString());
+        }
+
+        [TestMethod]
+        public void InterpolateLagrangeTest1()
+        {
+            var x = 2;
+            var validValue = 1;
+            var accuracy = 0.001m;
+
+            var value = Interpolation.InterpolateLagrange(inputValue1, x);
+
+            if (Abs(value - validValue) > accuracy)
+                Assert.Fail(Abs(value - validValue).ToString());
+        }
     }
 }

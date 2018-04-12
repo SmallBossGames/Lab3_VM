@@ -37,6 +37,31 @@ namespace Lab3_VM
             return outArray;
         }
 
+        
+        public static decimal InterpolateLagrange(decimal[,] inputTable, decimal x)
+        {
+            var koefficients = GetLagrange(inputTable);
+            var result = 0m;
+
+            for (int i = 0; i < koefficients.Length; i++)
+                result += koefficients[koefficients.Length - i - 1] * Pow(x, i);
+
+            return result;
+        }
+
+        private static decimal Pow(decimal value, int n)
+        {
+            var pool = 1m;
+
+            for (int i = 0; i < n; i++)
+                pool *= value;
+
+            return pool;
+        }
+
+
+        //Сплайны
+
         private static decimal[] GetLagrangeKoeff(decimal[,] inputTable, int i)
         {
             if (inputTable.GetLength(0) != 2) throw new FormatException();
@@ -117,6 +142,25 @@ namespace Lab3_VM
             }
 
             return outArray;
+        }
+
+        public static decimal InterpolateSpline(decimal[,] inputTable, decimal x)
+        {
+            var splineKoeffs = GetSplineCubeFull(inputTable);
+            var lineNum = -1;
+
+            for (int i = 0; i < inputTable.GetLength(1)-1; i++)
+            {
+                if (inputTable[0, i] <= x)
+                    lineNum = i;
+            }
+
+            if (lineNum < 0) throw new Exception("Wrong input");
+
+            decimal S(int k) => splineKoeffs[lineNum, k];
+            decimal w = x - inputTable[0, lineNum];
+
+            return ((S(0) * w + S(1)) * w + S(2)) * w + S(3);
         }
 
         private static decimal[,] GetSplineMatrix(decimal[,] inputTable)
