@@ -76,6 +76,11 @@ namespace Lab3_VM
             return outArray;
         }
 
+        /// <summary>
+        /// Возвращает массив коеффициентов m, без вывода непосредственно коэффициентов сплайна
+        /// </summary>
+        /// <param name="inputTable"></param>
+        /// <returns></returns>
         public static decimal[] GetSplineCube(decimal[,] inputTable)
         {
             var splineMatrix = GetSplineMatrix(inputTable);
@@ -93,8 +98,26 @@ namespace Lab3_VM
             return mKoeffArray;
         }
 
-        ////////////////////
-        //Попробуй сделать это через перечисления
+        public static decimal[,] GetSplineCubeFull(decimal[,] inputTable)
+        {
+            var mKoeffArray = GetSplineCube(inputTable);
+            var length = mKoeffArray.Length+1;
+            var outArray = new decimal[length, 4];
+
+            decimal H(int i) => inputTable[0, i + 1] - inputTable[0, i];
+            decimal D(int i) => (inputTable[1, i + 1] - inputTable[1, i]) / H(i);
+            decimal M(int i) => ((i == 0) || (i == length)) ? 0 : mKoeffArray[i - 1];
+
+            for (int i = 0; i < length; i++)
+            {
+                outArray[i, 3] = inputTable[1, i];
+                outArray[i, 2] = D(i) - (H(i) * (2 * M(i) + M(i + 1))) / 6m;
+                outArray[i, 1] = M(i) / 2m;
+                outArray[i, 0] = (M(i + 1) - M(i)) / (6 * H(i));
+            }
+
+            return outArray;
+        }
 
         private static decimal[,] GetSplineMatrix(decimal[,] inputTable)
         {

@@ -33,7 +33,7 @@ namespace Lab3_VM
 
             var value = Interpolation.GetLagrange(inputValue1);
 
-            var value2 = Interpolation.GetSplineCube(inputValue2);
+            var value2 = Interpolation.GetSplineCubeFull(inputValue2);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
