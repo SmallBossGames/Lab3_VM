@@ -14,19 +14,13 @@ namespace Lab3_VM
         [STAThread]
         static void Main()
         {
-
             decimal[,] inputValue1 =
-        {
+            {
             { -1, 0, 1, 2 },
             { 4, 2, 0, 1 }
-        };
-
-
+            };
 
             var value = Interpolation.GetLagrange(inputValue1);
-
-
-
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

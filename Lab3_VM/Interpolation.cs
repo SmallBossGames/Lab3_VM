@@ -8,7 +8,6 @@ namespace Lab3_VM
 {
     public static class Interpolation
     {
-        
         public static decimal[] GetLagrange(decimal[,] inputTable)
         {
             if (inputTable.GetLength(0) != 2) throw new FormatException();
@@ -42,7 +41,6 @@ namespace Lab3_VM
             if (inputTable.GetLength(0) != 2) throw new FormatException();
             var length = inputTable.GetLength(1);
 
-
             var outArray = new decimal[length];
 
             var koeffNumber = 0;
@@ -54,13 +52,13 @@ namespace Lab3_VM
 
                 koeffNumber++;
 
-                for (int k = koeffNumber-1; k >= 0; k--)
+                for (int k = koeffNumber - 1; k >= 0; k--)
                 {
                     outArray[k + 1] -= outArray[k] * inputTable[0, j];
                 }
             }
 
-            var koeff = inputTable[1,i];
+            var koeff = inputTable[1, i];
 
             for (int j = 0; j < length; j++)
             {
@@ -76,10 +74,5 @@ namespace Lab3_VM
 
             return outArray;
         }
-
-
-
-
-
     }
 }

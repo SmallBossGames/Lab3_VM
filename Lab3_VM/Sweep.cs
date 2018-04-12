@@ -19,7 +19,7 @@ namespace Lab2_VM
             decimal[] matrixRes = new decimal[N];
 
             y = matrixA[0, 0]; // верно
-            A[0] = -matrixA[0, 1] / matrixA[0,0]; // верно
+            A[0] = -matrixA[0, 1] / matrixA[0, 0]; // верно
             B[0] = right[0] / matrixA[0, 0]; // верно
 
             for (int i = 1; i < N1; i++)
