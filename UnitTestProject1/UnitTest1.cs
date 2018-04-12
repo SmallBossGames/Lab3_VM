@@ -35,7 +35,6 @@ namespace UnitTestProject1
             {
                 if (Abs(value[i] - output1[i]) > accuracy) Assert.Fail(Abs(value[i] - output1[i]).ToString());
             }
-
         }
 
         [TestMethod]
@@ -48,7 +47,6 @@ namespace UnitTestProject1
             {
                 if (Abs(value[i] - outputSpline2[i]) > accuracy) Assert.Fail(Abs(value[i] - outputSpline2[i]).ToString());
             }
-
         }
     }
 }

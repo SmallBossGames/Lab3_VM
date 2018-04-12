@@ -24,18 +24,18 @@ namespace Lab2_VM
             decimal[] matrixRes = new decimal[hight];
 
             y = matrixA[0, 0]; // верно
-            A[0] = -matrixA[0, 1] / matrixA[0,0]; // верно
-            B[0] = matrixA[0, length-1] / matrixA[0, 0]; // верно
+            A[0] = -matrixA[0, 1] / matrixA[0, 0]; // верно
+            B[0] = matrixA[0, length - 1] / matrixA[0, 0]; // верно
 
             for (int i = 1; i < N1; i++)
             {
                 y = matrixA[i, i] + matrixA[i, i - 1] * A[i - 1];
                 A[i] = -matrixA[i, i + 1] / y;
-                B[i] = (matrixA[i, length-1] - matrixA[i, i - 1] * B[i - 1]) / y;
+                B[i] = (matrixA[i, length - 1] - matrixA[i, i - 1] * B[i - 1]) / y;
             }
 
             y = matrixA[N1, N1] + matrixA[N1, N1 - 1] * A[N1 - 1];
-            B[N1] = (matrixA[N1,length-1] - matrixA[N1, N1 - 1] * B[N1 - 1]) / y;
+            B[N1] = (matrixA[N1, length - 1] - matrixA[N1, N1 - 1] * B[N1 - 1]) / y;
 
             matrixRes[N1] = B[N1];
 
@@ -47,7 +47,6 @@ namespace Lab2_VM
             return matrixRes;
         }
 
-        
         public static decimal[] SweepMatrix(int N, decimal[,] matrixA, decimal[] right)
         {
             int N1 = N - 1;
