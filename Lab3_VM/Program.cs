@@ -31,9 +31,13 @@ namespace Lab3_VM
 
             };
 
+            decimal[] inputValue3 = { -12.2327m, -14.2776m, -8.9511m, -0.1808m, 5.0256m };
+
             var value = Interpolation.GetLagrange(inputValue1);
 
             var value2 = Interpolation.GetSplineCube(inputValue2);
+
+            var value3 = Smoothing.Smooth(5, inputValue3);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

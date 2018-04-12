@@ -12,7 +12,7 @@ namespace Lab3_VM
         {
             decimal[] W = new decimal[N];
 
-            for (int i = 0; i < N - 1; i++)
+            for (int i = 0; i < N; i++)
             {
                 if (i == 0) W[i] = 0.2m * (3 * input[0] + 2 * input[1] + input[2] - input[4]); // для первого
                 else if (i == 1) W[i] = 0.1m * (4 * input[0] + 3 * input[1] + 2 * input[2] + input[3]); // для второго
