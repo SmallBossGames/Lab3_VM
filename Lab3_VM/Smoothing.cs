@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lab3_VM
 {
-    class Smoothing
+    public static class Smoothing
     {
-        public decimal[] Smooth(int N, decimal[] input)
+        public static decimal[] Smooth(int N, decimal[] input)
         {
             decimal[] W = new decimal[N];
 
