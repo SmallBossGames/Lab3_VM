@@ -77,6 +77,9 @@ namespace Lab3_VM
             return outArray;
         }
 
-       // private static decimal[] SumArray => throw new NotImplementedException();
+
+
+
+
     }
 }
