@@ -37,14 +37,17 @@ namespace Lab3_VM
             return outArray;
         }
 
-        
-        public static decimal InterpolateLagrange(decimal[,] inputTable, decimal x)
-        {
-            var koefficients = GetLagrange(inputTable);
-            var result = 0m;
 
-            for (int i = 0; i < koefficients.Length; i++)
-                result += koefficients[koefficients.Length - i - 1] * Pow(x, i);
+        public static decimal InterpolateLagrange(decimal[,] inputTable, decimal x) 
+            => InterpolateLagrange(GetLagrange(inputTable), x);
+
+        public static decimal InterpolateLagrange(decimal[] lagrangeKoeffs, decimal x)
+        {
+            var result = 0m;
+            var count = lagrangeKoeffs.Length;
+
+            for (int i = 0; i < count; i++)
+                result += lagrangeKoeffs[count - i - 1] * Pow(x, i);
 
             return result;
         }
