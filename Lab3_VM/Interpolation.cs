@@ -9,6 +9,10 @@ namespace Lab3_VM
 {
     public static class Interpolation
     {
+        /// <summary>
+        /// Возвращает массив коэффициентов лагранжа
+        /// </summary>
+        /// <param name="inputTable">Таблица (x,y)</param>
         public static decimal[] GetLagrange(decimal[,] inputTable)
         {
             if (inputTable.GetLength(0) != 2) throw new FormatException();
@@ -37,10 +41,15 @@ namespace Lab3_VM
             return outArray;
         }
 
-
+        /// <summary>
+        /// Принимает начальную таблицу значений и x, возвращает y
+        /// </summary>
         public static decimal InterpolateLagrange(decimal[,] inputTable, decimal x) 
             => InterpolateLagrange(GetLagrange(inputTable), x);
 
+        /// <summary>
+        /// Принимает коэффициенты лагранжа и x, возвращает y
+        /// </summary>
         public static decimal InterpolateLagrange(decimal[] lagrangeKoeffs, decimal x)
         {
             var result = 0m;
