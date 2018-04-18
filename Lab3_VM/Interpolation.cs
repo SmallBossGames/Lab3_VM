@@ -71,9 +71,6 @@ namespace Lab3_VM
             return pool;
         }
 
-
-        //Сплайны
-
         private static decimal[] GetLagrangeKoeff(decimal[,] inputTable, int i)
         {
             if (inputTable.GetLength(0) != 2) throw new FormatException();
@@ -112,6 +109,8 @@ namespace Lab3_VM
 
             return outArray;
         }
+
+        //Сплайны
 
         /// <summary>
         /// Возвращает массив коеффициентов m, без вывода непосредственно коэффициентов сплайна
