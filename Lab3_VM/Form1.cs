@@ -39,7 +39,9 @@ namespace Lab3_VM
 
             result = Interpolation.GetLagrange(truth);
 
-            for (int i = 0; i < result.Length; i++) res += result[i].ToString() + "x^" + (result.Length - i).ToString() + " + ";
+            for (int i = 0; i < result.Length-1; i++) res += result[i].ToString() + "x^" + (result.Length - 1 - i).ToString() + " + ";
+
+            res += result[result.Length - 1];
 
             LagrangeTextBox.Text = res;
         }
@@ -75,6 +77,8 @@ namespace Lab3_VM
             for (int i = 0; i < N; i++) res += result[i].ToString() + " ";
 
             SmoothTextBox.Text = res;
+
+
         }
     }
 }
