@@ -47,7 +47,7 @@ namespace Lab3_VM
             LagrangeTextBox.Text = res;
 
             for (int i = 0; i < N; i++)
-                chart1.Series[0].Points.AddXY(truth[1, i], Interpolation.InterpolateLagrange(truth, truth[0, i]));
+                chart1.Series[0].Points.AddXY(truth[0, i], Interpolation.InterpolateLagrange(truth, truth[0, i]));
         }
 
         private void SplineButton_Click(object sender, EventArgs e)
