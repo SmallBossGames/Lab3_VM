@@ -77,6 +77,8 @@ namespace Lab3_VM
             for (int i = 0; i < N; i++) res += result[i].ToString() + " ";
 
             SmoothTextBox.Text = res;
+
+
         }
     }
 }
