@@ -30,13 +30,15 @@ namespace Lab3_VM
         {
             chart1.Series[0].Points.Clear();
             decimal[,] truth = new decimal[2, N]; // строка, столбец
-            decimal[] result = new decimal[N];
+            decimal[] result = new decimal[4 * N];
             string res = "L=";
 
             for (int i = 0; i < 2; i++)
             {
                 for (int j = 0; j < N; j++) truth[i, j] = Convert.ToDecimal(dataGridView1[j, i].Value);
             }
+
+            decimal h = (truth[0, 2] - truth[0, 1]) / 4; // шаг
 
             result = Interpolation.GetLagrange(truth);
 
@@ -46,15 +48,15 @@ namespace Lab3_VM
 
             LagrangeTextBox.Text = res;
 
-            for (int i = 0; i < N; i++)
-                chart1.Series[0].Points.AddXY(truth[0, i], Interpolation.InterpolateLagrange(truth, truth[0, i]));
+            for (int i = 0; i < 4 * N; i++)
+                chart1.Series[0].Points.AddXY((truth[0, 0] + i * h), Interpolation.InterpolateLagrange(truth, (truth[0, 0] + i * h)));
         }
 
         private void SplineButton_Click(object sender, EventArgs e)
         {
             chart1.Series[0].Points.Clear();
             decimal[,] truth = new decimal[2, N];
-            decimal[] result = new decimal[N];
+            decimal[] result = new decimal[4 * N];
             string res = "";
 
             for (int i = 0; i < 2; i++)
@@ -62,13 +64,15 @@ namespace Lab3_VM
                 for (int j = 0; j < N; j++) truth[i, j] = Convert.ToDecimal(dataGridView1[j, i].Value);
             }
 
-            for (int i = 0; i < N; i++) result[i] = Interpolation.InterpolateSpline(truth, truth[0, i]);
+            decimal h = (truth[0, 2] - truth[0, 1]) / 4; // шаг
+
+            for (int i = 0; i < 4 * N; i++) result[i] = Interpolation.InterpolateSpline(truth, (truth[0, 0] + i * h));
 
             for (int i = 0; i < result.Length; i++) res += result[i].ToString() + " ";
 
             SplineTextBox.Text = res;
 
-            for (int i = 0; i < N; i++) chart1.Series[0].Points.AddXY(truth[0, i], result[i]);
+            for (int i = 0; i < 4 * N; i++) chart1.Series[0].Points.AddXY((truth[0, 0] + i * h), result[i]);
         }
 
         private void SmoothButton_Click(object sender, EventArgs e)
