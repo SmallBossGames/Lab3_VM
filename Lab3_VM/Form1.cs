@@ -21,9 +21,9 @@ namespace Lab3_VM
 
         private void EnterButton_Click(object sender, EventArgs e)
         {
-            dataGridView1.ColumnCount = Convert.ToInt32(NTextBox.Text);
-            dataGridView1.RowCount = 2;
             N = Convert.ToInt32(NTextBox.Text);
+            dataGridView1.ColumnCount = N;
+            dataGridView1.RowCount = 2;            
         }
 
         private void button1_Click(object sender, EventArgs e)
