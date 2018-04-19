@@ -44,7 +44,7 @@ namespace Lab3_VM
         /// <summary>
         /// Принимает начальную таблицу значений и x, возвращает y
         /// </summary>
-        public static decimal InterpolateLagrange(decimal[,] inputTable, decimal x) 
+        public static decimal InterpolateLagrange(decimal[,] inputTable, decimal x)
             => InterpolateLagrange(GetLagrange(inputTable), x);
 
         /// <summary>
@@ -70,6 +70,7 @@ namespace Lab3_VM
 
             return pool;
         }
+        //Сплайны
 
         private static decimal[] GetLagrangeKoeff(decimal[,] inputTable, int i)
         {
@@ -110,8 +111,6 @@ namespace Lab3_VM
             return outArray;
         }
 
-        //Сплайны
-
         /// <summary>
         /// Возвращает массив коеффициентов m, без вывода непосредственно коэффициентов сплайна
         /// </summary>
@@ -137,7 +136,7 @@ namespace Lab3_VM
         public static decimal[,] GetSplineCubeFull(decimal[,] inputTable)
         {
             var mKoeffArray = GetSplineCube(inputTable);
-            var length = mKoeffArray.Length+1;
+            var length = mKoeffArray.Length + 1;
             var outArray = new decimal[length, 4];
 
             decimal H(int i) => inputTable[0, i + 1] - inputTable[0, i];
@@ -160,7 +159,7 @@ namespace Lab3_VM
             var splineKoeffs = GetSplineCubeFull(inputTable);
             var lineNum = -1;
 
-            for (int i = 0; i < inputTable.GetLength(1)-1; i++)
+            for (int i = 0; i < inputTable.GetLength(1) - 1; i++)
             {
                 if (inputTable[0, i] <= x)
                     lineNum = i;
