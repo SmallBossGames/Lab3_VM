@@ -30,7 +30,6 @@ namespace Lab3_VM
         {
             chart1.Series[0].Points.Clear();
             decimal[,] truth = new decimal[2, N]; // строка, столбец
-            decimal[] result = new decimal[4 * N];
             string res = "L=";
 
             for (int i = 0; i < 2; i++)
@@ -38,18 +37,19 @@ namespace Lab3_VM
                 for (int j = 0; j < N; j++) truth[i, j] = Convert.ToDecimal(dataGridView1[j, i].Value);
             }
 
-            decimal h = (truth[0, 2] - truth[0, 1]) / 4; // шаг
+            decimal h = (truth[0, 1] - truth[0, 0]) / 4.0m; // шаг
 
-            result = Interpolation.GetLagrange(truth);
+            var result = Interpolation.GetLagrange(truth);
 
-            for (int i = 0; i < result.Length - 1; i++) res += result[i].ToString() + "x^" + (result.Length - 1 - i).ToString() + " + ";
+            for (int i = 0; i < result.Length - 1; i++)
+                res += result[i].ToString() + "x^" + (result.Length - 1 - i).ToString() + " + ";
 
             res += result[result.Length - 1];
 
             LagrangeTextBox.Text = res;
 
-            for (int i = 0; i < 4 * N; i++)
-                chart1.Series[0].Points.AddXY((truth[0, 0] + i * h), Interpolation.InterpolateLagrange(truth, (truth[0, 0] + i * h)));
+            for (int i = 0; i <= 4 * (N-1); i++)
+                chart1.Series[0].Points.AddXY((truth[0, 0] + i * h), Interpolation.InterpolateLagrange(result, (truth[0, 0] + i * h)));
         }
 
         private void SplineButton_Click(object sender, EventArgs e)
@@ -66,13 +66,16 @@ namespace Lab3_VM
 
             decimal h = (truth[0, 2] - truth[0, 1]) / 4; // шаг
 
-            for (int i = 0; i < 4 * N; i++) result[i] = Interpolation.InterpolateSpline(truth, (truth[0, 0] + i * h));
+            for (int i = 0; i <= 4 * (N-1); i++)
+                result[i] = Interpolation.InterpolateSpline(truth, (truth[0, 0] + i * h));
 
-            for (int i = 0; i < result.Length; i++) res += result[i].ToString() + " ";
+            for (int i = 0; i < result.Length; i++)
+                res += result[i].ToString() + " ";
 
             SplineTextBox.Text = res;
 
-            for (int i = 0; i < 4 * N; i++) chart1.Series[0].Points.AddXY((truth[0, 0] + i * h), result[i]);
+            for (int i = 0; i <= 4 * (N-1); i++)
+                chart1.Series[0].Points.AddXY((truth[0, 0] + i * h), result[i]);
         }
 
         private void SmoothButton_Click(object sender, EventArgs e)
